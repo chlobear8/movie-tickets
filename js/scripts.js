@@ -45,19 +45,34 @@ Ticket.prototype.moviePrice = function() {
   return moviePrice;
 }
 
-function totalPrice() {
+Ticket.prototype.totalPrice = function() {
   return (timePrice + agePrice + moviePrice).toString();
 }
 
 //User Interface Logic
+
+
+
+function displayPrice(totalPrice) {
+  let displayDiv = document.querySelector("div#display-price");
+  console.log(totalPrice);
+  displayDiv.innerText = null;
+  let h4 = document.createElement("h4");
+  h4.append("Your ticket costs: $" + totalPrice)
+  displayDiv.append(h4);
+}
+
 
 function handleRadio(event) {
   event.preventDefault();
   const timeSelection = document.querySelector("input[name='time']:checked").value;
   const ageSelection = document.querySelector("input[name='age']:checked").value;
   const movieSelection = document.querySelector("input[name='movie']:checked").value;
-  let newTicket = new Ticket(timeSelection, ageSelection, movieSelection)
+  let movieTicket = new Ticket(timeSelection, ageSelection, movieSelection);
+  displayPrice(movieTicket);
 }
+
+
 
 window.addEventListener("load", function() {
   this.document.getElementById("radio-form").addEventListener("submit", handleRadio);
