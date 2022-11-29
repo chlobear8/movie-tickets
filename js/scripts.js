@@ -48,3 +48,17 @@ Ticket.prototype.moviePrice = function() {
 function totalPrice() {
   return (timePrice + agePrice + moviePrice).toString();
 }
+
+//User Interface Logic
+
+function handleRadio(event) {
+  event.preventDefault();
+  const timeSelection = document.querySelector("input[name='time']:checked").value;
+  const ageSelection = document.querySelector("input[name='age']:checked").value;
+  const movieSelection = document.querySelector("input[name='movie']:checked").value;
+  let newTicket = new Ticket(timeSelection, ageSelection, movieSelection)
+}
+
+window.addEventListener("load", function() {
+  this.document.getElementById("radio-form").addEventListener("submit", handleRadio);
+});
