@@ -1,17 +1,18 @@
 //Business User Interface
 
-function Ticket(time, age, movie) {
+function Ticket(time, age, movie, price) {
 this.time = time;
 this.age = age;
 this.movie = movie;
+this.price = price;
 }
 
 Ticket.prototype.timePrice = function() {
-  let timePrice = 0;
-  if (Ticket.time === "matinee") {
+  let timePrice = 0
+  if (this.time === "matinee") {
     timePrice += 5;
   }
-  else if (Ticket.time === "afternoon") {
+  else if (this.time === "afternoon") {
     timePrice += 10;
   }
   else {
@@ -22,10 +23,10 @@ Ticket.prototype.timePrice = function() {
 
 Ticket.prototype.agePrice = function() {
   let agePrice = 0;
-  if (Ticket.age === "youth") {
-    timePrice += 2;
+  if (this.age === "youth") {
+    agePrice += 2;
   }
-  else if (Ticket.age === "senior") {
+  else if (this.age === "senior") {
     agePrice += 5;
   }
   else {
@@ -36,7 +37,7 @@ Ticket.prototype.agePrice = function() {
 
 Ticket.prototype.moviePrice = function() {
   let moviePrice = 0;
-  if (Ticket.movie === "old movie") {
+  if (this.movie === "old movie") {
     moviePrice += 2;
   }
   else {
@@ -46,19 +47,20 @@ Ticket.prototype.moviePrice = function() {
 }
 
 Ticket.prototype.totalPrice = function() {
-  return (timePrice + agePrice + moviePrice).toString();
+  let totalPrice = (this.timePrice() + this.agePrice() + this.moviePrice()).toString();
+  return totalPrice;
 }
+
 
 //User Interface Logic
 
 
 
-function displayPrice(totalPrice) {
+function displayPrice(movieTicket) {
   let displayDiv = document.querySelector("div#display-price");
-  console.log(totalPrice);
   displayDiv.innerText = null;
   let h4 = document.createElement("h4");
-  h4.append("Your ticket costs: $" + totalPrice)
+  h4.append("Your ticket costs: $" + movieTicket.totalPrice())
   displayDiv.append(h4);
 }
 
